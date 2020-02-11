@@ -51,6 +51,8 @@ matrix& matrix::operator=(const matrix& A)
 
 matrix matrix::operator+(const matrix& A)
 {
+	if (A.get_column() != column || A.get_row() != row)
+		throw dimension_mismatch();
 	matrix temp(row, column);
 	for (int i = 0; i < row * column; i++)
 		temp.element[i] = element[i] + A.element[i];
@@ -59,6 +61,8 @@ matrix matrix::operator+(const matrix& A)
 
 matrix matrix::operator-(const matrix& A)
 {
+	if (A.get_column() != column || A.get_row() != row)
+		throw dimension_mismatch();
 	matrix temp(row, column);
 	for (int i = 0; i < row * column; i++)
 		temp.element[i] = element[i] - A.element[i];
@@ -67,6 +71,8 @@ matrix matrix::operator-(const matrix& A)
 
 matrix matrix::operator*(const matrix& A)
 {
+	if (column != A.get_row())
+		throw dimension_mismatch();
 	matrix temp(row, A.column);
 	int i, j, k;
 	double t;
@@ -123,13 +129,16 @@ void matrix::get_from_console()
 
 matrix inv(const matrix& A)
 {
+	if (A.get_column() != A.get_row())
+		throw dimension_mismatch();
+
 	matrix temp(A.get_row(), 2 * A.get_column());
 	matrix C(A.get_row(), A.get_column());
 	int i, j, k;
 	vector<int>local = { 0,0 }, h, l;
 	double max;
 
-	//³õÊ¼»¯Ôö¹ã¾ØÕó
+	//åˆå§‹åŒ–å¢å¹¿çŸ©é˜µ
 	for(i=0;i<A.get_row();i++)
 		for (j = 0; j < 2 * A.get_column(); j++)
 		{
@@ -164,7 +173,7 @@ matrix inv(const matrix& A)
 			for (int j1 = 0; j1 < A.get_column(); j1++)
 				C(i1, j1) = temp(i1, j1);
 	}
-	//ÅÅĞò
+	//æ’åº
 	for (i = 0; i < temp.get_row(); i++)//The number of loops represents that the (i, i) element should be 1
 	{
 		double temp3;
