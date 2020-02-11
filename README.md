@@ -1,2 +1,4 @@
 # matrix
-a small matrix class
+一个简易的矩阵类
+提供了矩阵的基本功能
+其中求逆是运用了高斯赛德尔全主元法
