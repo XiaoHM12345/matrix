@@ -8,18 +8,18 @@ using namespace std;
 class matrix
 {
 public:
-	//¹¹ÔìÓëÎö¹¹
+	//æ„é€ å‡½æ•°
 	matrix(int i, int j);
 	matrix(int i, int j, initializer_list<double> input);
 	matrix(const matrix& A);
 	~matrix();
 	matrix& operator =(const matrix& A);
-	//ÖØÔØÔËËã·û
+	//è¿ç®—ç¬¦é‡è½½
 	matrix operator +(const matrix& A);
 	matrix operator -(const matrix& A);
 	matrix operator *(const matrix& A);
 	double& operator ()(int i, int j) const;
-	//»ñÈ¡¾ØÕóÎ¬¶È
+
 	int get_row() const;
 	int get_column() const;
 
