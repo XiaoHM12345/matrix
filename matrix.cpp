@@ -33,6 +33,25 @@ matrix::matrix(const matrix& A)
 		element[i] = A.element[i];
 }
 
+matrix::matrix(ifstream& matrixFile)
+{
+	int irow, icolumn;
+	double e;
+	vector<double> s(0);
+	matrixFile>>irow;
+	matrixFile>>icolumn;
+	while(matrixFile>>e)
+		s.push_back(e);
+	if(irow*icolumn != s.size())
+		throw dimension_mismatch();
+	element = new double[irow * icolumn];
+	row = irow;
+	column = icolumn;
+	for(int i = 0; i < row * column; i++)
+		element[i] = s[i];
+	matrixFile.close();
+}
+
 matrix::~matrix()
 {
 	delete []element;

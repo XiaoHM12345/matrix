@@ -1,7 +1,10 @@
 #pragma once
+#ifndef _MATRIX_
+#define _MATRIX_
 #include<initializer_list>
 #include<vector>
 #include<exception>
+#include<fstream>
 
 class dimension_mismatch : public std::exception
 {
@@ -21,6 +24,7 @@ public:
 	matrix(int i, int j);
 	matrix(int i, int j, initializer_list<double> input);
 	matrix(const matrix& A);
+	matrix(ifstream& matrixFile);
 	~matrix();
 	matrix& operator =(const matrix& A);
 	//重载运算符
@@ -41,3 +45,5 @@ private:
 
 matrix inv(const matrix& A);
 vector<int> find_max_of_matrix(const matrix& A, vector<int>h, vector<int>l);
+
+#endif
